@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+      name="feedback-form"
+      template="feedbackform.pt"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".feedbackform.FeedbackForm"
+      permission="collective.anonfeedback.giveFeedback"
+      />
+            
+</configure>
