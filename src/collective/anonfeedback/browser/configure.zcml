@@ -4,7 +4,7 @@
 
   <browser:page
       name="feedback-form"
-      template="feedback-form.pt"
+      template="feedback_form.pt"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".feedback.FeedbackForm"
       permission="collective.anonfeedback.giveFeedback"

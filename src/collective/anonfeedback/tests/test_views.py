@@ -67,5 +67,7 @@ class TestInstalled(unittest.TestCase):
         # Admin *can* see the feedback.
         self.assertIn('View Feedback', browser.contents)
         
-        import pdb;pdb.set_trace()
-        browser.getLink('View Feedback').open()
+        browser.getLink('View Feedback').click()
+        
+        self.assertIn('<h3>Test subject</h3>', browser.contents)
+        

@@ -1,8 +1,9 @@
 from App import config
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
-import os
 from glob import glob1
+import os
+import time
 
 def feedback_dir():
     vardir = config.getConfiguration().clienthome
@@ -36,6 +37,7 @@ class FeedbackForm(BrowserView):
                 maxnum += 1
                 filename = os.path.join(fbdir, 'feedback.%08i.txt' % maxnum)
                 try:
+                    # Create, but fail if file exists.
                     fd = os.open(filename, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
                     break
                 except OSError as e:
@@ -46,7 +48,7 @@ class FeedbackForm(BrowserView):
                     raise
     
             try:
-                os.write(fd, """%s\n\n%s\n""" % (self.subject.strip(), self.feedback.strip()))
+                os.write(fd, """%s\n\n%s\n""" % (self.subject, self.feedback))
             finally:
                 os.close(fd)
             
@@ -56,3 +58,21 @@ class FeedbackForm(BrowserView):
             messages.add(u'Your feedback has been submitted.', type=u'info')
             
             
+class FeedbackView(BrowserView):
+    
+    def get_feedback(self):
+        fbdir = feedback_dir()
+        allfiles = sorted(glob1(fbdir, 'feedback.*.txt'), reverse=True)
+        
+        feedback = []
+        for filename in allfiles:
+            path = os.path.join(fbdir, filename)
+            fb = open(path).read()
+            subject, body = fb.split('\n\n', 1)
+            body = body.split('\n')
+            mtime = time.ctime(os.path.getmtime(path))
+            feedback.append({'subject': subject, 'body': body, 'time': mtime})
+            
+        return feedback
+        
+        
