@@ -6,7 +6,9 @@ import os
 import time
 
 def feedback_dir():
-    vardir = config.getConfiguration().clienthome
+    # XXX This needs to be configurable.
+    clientdir = config.getConfiguration().clienthome
+    vardir = os.path.realpath(os.path.join(clientdir, os.path.pardir))
     fbdir = os.path.join(vardir, 'feedback')
     if not os.path.exists(fbdir):
         os.mkdir(fbdir)

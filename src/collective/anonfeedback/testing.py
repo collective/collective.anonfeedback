@@ -1,3 +1,4 @@
+import os
 import tempfile
 import shutil
 from App import config
@@ -21,12 +22,13 @@ class CollectiveAnonfeedback(PloneSandboxLayer):
                        collective.anonfeedback,
                        context=configurationContext)
 
-        self.clienthome = tempfile.mkdtemp()
+        # Temporary vardir
+        self.vardir = tempfile.mkdtemp()
         self.oldclienthome = config.getConfiguration().clienthome
-        config.getConfiguration().clienthome = self.clienthome
+        config.getConfiguration().clienthome = os.path.join(self.vardir, 'instance')
         
     def tearDownZope(self, app):
-        shutil.rmtree(self.clienthome)
+        shutil.rmtree(self.vardir)
         config.getConfiguration().clienthome = self.oldclienthome
         
     def setUpPloneSite(self, portal):
