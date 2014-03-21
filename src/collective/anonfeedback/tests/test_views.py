@@ -21,6 +21,7 @@ class TestInstalled(unittest.TestCase):
     
     def get_browser(self, username=None, password=None):
         browser = Browser(self.app)
+        browser.handleErrors = False
         portalURL = self.portal.absolute_url()
         if username:
             browser.open(portalURL + '/login_form')
@@ -66,3 +67,5 @@ class TestInstalled(unittest.TestCase):
         # Admin *can* see the feedback.
         self.assertIn('View Feedback', browser.contents)
         
+        import pdb;pdb.set_trace()
+        browser.getLink('View Feedback').open()
