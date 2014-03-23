@@ -1,7 +1,7 @@
 Change history
 **************
 
-1.1 (unreleased)
+1.0 (2014-03-23)
 ----------------
 
 - Nothing changed yet.
