@@ -8,11 +8,11 @@ def read(*rnames):
 
 long_description = (
     read('README.txt')
-    + '\n' +
+    + '\n\n' +
     read('docs', 'CONTRIBUTORS.txt')
-    + '\n' +
+    + '\n\n' +
     read('docs', 'CHANGES.txt')
-    + '\n')
+    + '\n\n')
 
 setup(name='collective.anonfeedback',
       version=version,

@@ -14,7 +14,7 @@ transaction log, and the requirement of this package was explicitly that you
 should be anonymous even if you forget to log out.
 
 Warning!
---------
+********
 
 Please note that it may still be possible to figure out the posters identity
 by comparing web-server logs and IP-adresses and times, etc. To achieve true
@@ -22,4 +22,3 @@ anonymity you must also anonymize the internet access. The purpose of this
 package is just to make it hard for your boss to figure out who thought his
 proposal for site color scheme was ugly, not to provide truly anonymous
 whistleblower access.
-
